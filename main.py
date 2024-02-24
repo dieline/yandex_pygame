@@ -8,9 +8,10 @@ from drawing import Drawing
 
 pygame.init()
 sc = pygame.display.set_mode((WIDTH, HEIGHT))
+sc_map = pygame.Surface((WIDTH // MAP_SCALE, HEIGHT // MAP_SCALE))
 clock = pygame.time.Clock()
 player = Player()
-drawing = Drawing(sc)
+drawing = Drawing(sc, sc_map)
 
 while True:
     for event in pygame.event.get():
@@ -20,13 +21,9 @@ while True:
     sc.fill(BLACK)
 
     drawing.background()
-    drawing.world(player.pos, player.angel)
+    drawing.world(player.pos, player.angle)
     drawing.fps(clock)
-
-    #pygame.draw.circle(sc, GREEN, (int(player.x), int(player.y)), 12)
-    #pygame.draw.line(sc, GREEN, player.pos, (player.x + WIDTH * math.cos(player.angel), (player.y + WIDTH * math.sin(player.angel))))
-    #for x, y in world_map:
-        #pygame.draw.rect(sc, DARKGRAY, (x, y, TILE, TILE), 2)
+    drawing.mini_map(player)
 
     pygame.display.flip()
     clock.tick()
