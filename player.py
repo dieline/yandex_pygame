@@ -21,22 +21,23 @@ class Player:
         next_rect.move_ip(dx, dy)
         hit_indexes = next_rect.collidelistall(collision_walls)
         delta_x, delta_y = 0, 0
-        for hit_index in hit_indexes:
-            hit_rect = collision_walls[hit_index]
-            if dx > 0:
-                delta_x += next_rect.right - hit_rect.left
-            else:
-                delta_x += hit_rect.right - next_rect.left
-            if dy > 0:
-                delta_y += next_rect.bottom - hit_rect.top
-            else:
-                delta_y += hit_rect.bottom - next_rect.top
-        if abs(delta_x - delta_y) < 10:
-            dx, dy = 0, 0
-        elif delta_x > delta_y:
-            dy = 0
-        elif delta_y > delta_x:
-            dx = 0
+        if len(hit_indexes):
+            for hit_index in hit_indexes:
+                hit_rect = collision_walls[hit_index]
+                if dx > 0:
+                    delta_x += next_rect.right - hit_rect.left
+                else:
+                    delta_x += hit_rect.right - next_rect.left
+                if dy > 0:
+                    delta_y += next_rect.bottom - hit_rect.top
+                else:
+                    delta_y += hit_rect.bottom - next_rect.top
+            if abs(delta_x - delta_y) < 10:
+                dx, dy = 0, 0
+            elif delta_x > delta_y:
+                dy = 0
+            elif delta_y > delta_x:
+                dx = 0
         self.x += dx
         self.y += dy
         self.rect.center = self.x, self.y
@@ -49,7 +50,6 @@ class Player:
         sin_a = math.sin(self.angle)
         cos_a = math.cos(self.angle)
         keys = pygame.key.get_pressed()
-
         if keys[pygame.K_ESCAPE]:
             exit()
         if keys[pygame.K_w]:

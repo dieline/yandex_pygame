@@ -10,6 +10,7 @@ def mapping(a, b):
 def ray_casting(sc, player_pos, player_angle):
     ox, oy = player_pos
     xm, ym = mapping(ox, oy)
+    depth_v, depth_h = 0, 0
     cur_angle = player_angle - HALF_FOV
     for ray in range(NUM_RAYS):
         sin_a = math.sin(cur_angle)
