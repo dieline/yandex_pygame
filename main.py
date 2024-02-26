@@ -26,4 +26,4 @@ while True:
     drawing.mini_map(player)
 
     pygame.display.flip()
-    clock.tick()
+    clock.tick(FPS)
