@@ -28,7 +28,7 @@ SCALE = WIDTH // NUM_RAYS
 # player
 player_pos = (HALF_WIDTH, HALF_HEIGHT)
 player_angle = 0
-player_speed = 0.5
+player_speed = 1
 
 # color
 WHITE = (255, 255, 255)
