@@ -4,6 +4,7 @@ from player import Player
 from drawing import Drawing
 
 pygame.init()
+pygame.mouse.set_visible(False)
 sc = pygame.display.set_mode((WIDTH, HEIGHT))
 sc_map = pygame.Surface((WIDTH // MAP_SCALE, HEIGHT // MAP_SCALE))
 clock = pygame.time.Clock()

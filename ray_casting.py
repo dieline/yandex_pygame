@@ -41,8 +41,18 @@ def ray_casting(sc, player_pos, player_angle, texture):
         depth, offset = (depth_v, yv) if depth_v < depth_h else (depth_h, xh)
         offset = int(offset) % TILE
         depth *= math.cos(player_angle - cur_angle)
-        proj_height = PROJ_COEFF / depth
-        wall_column = texture.subsurface(offset * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_HEIGHT)
-        wall_column = pygame.transform.scale(wall_column, (TEXTURE_SCALE, proj_height))
-        sc.blit(wall_column, (ray * SCALE, HALF_HEIGHT - proj_height // 2))
+        depth = max(depth, 0.00001)
+        proj_height = int(PROJ_COEFF / depth)
+        if proj_height > HEIGHT:
+            coeff = proj_height / HEIGHT
+            texture_height = TEXTURE_HEIGHT / coeff
+            wall_column = texture.subsurface(offset * TEXTURE_SCALE,
+                                             TEXTURE_HEIGHT // 2 - texture_height // 2,
+                                             TEXTURE_SCALE, texture_height)
+            wall_column = pygame.transform.scale(wall_column, (SCALE, HEIGHT))
+            sc.blit(wall_column, (ray * SCALE, 0))
+        else:
+            wall_column = texture.subsurface(offset * TEXTURE_SCALE, 0, TEXTURE_SCALE, TEXTURE_HEIGHT)
+            wall_column = pygame.transform.scale(wall_column, (TEXTURE_SCALE, proj_height))
+            sc.blit(wall_column, (ray * SCALE, HALF_HEIGHT - proj_height // 2))
         cur_angle += DELTA_ANGLE

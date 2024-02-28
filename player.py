@@ -8,7 +8,7 @@ class Player:
     def __init__(self):
         self.x, self.y = player_pos
         self.angle = player_angle
-        self.sensitivity = 0.002
+        self.sensitivity = 0.004
         self.side = 50
         self.rect = pygame.Rect(*player_pos, self.side, self.side)
 

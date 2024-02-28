@@ -12,7 +12,7 @@ class Drawing:
         self.texture = pygame.image.load("imgs/1.png").convert()
 
     def background(self):
-        pygame.draw.rect(self.sc, SKYBLUE, (0, 0, WIDTH, HALF_HEIGHT))
+        pygame.draw.rect(self.sc, tuple(map(lambda x: x - 20, DARKGRAY)), (0, 0, WIDTH, HALF_HEIGHT))
         pygame.draw.rect(self.sc, DARKGRAY, (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT))
 
     def world(self, player_pos, player_angle):
