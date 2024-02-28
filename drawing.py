@@ -9,14 +9,18 @@ class Drawing:
         self.sc = sc
         self.sc_map = sc_map
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.texture = pygame.image.load("imgs/1.png").convert()
+        self.textures = {1: pygame.image.load("imgs/stone_brick_wall.jpg").convert(),
+                         2: pygame.image.load("imgs/stone_wall.jpg").convert(),
+                         3: pygame.image.load("imgs/brick_wall.jpg").convert(),
+                         4: pygame.image.load("imgs/wood_wall.jpg").convert(),
+                         5: pygame.image.load("imgs/steelwood_wall.jpg").convert()}
 
     def background(self):
         pygame.draw.rect(self.sc, tuple(map(lambda x: x - 20, DARKGRAY)), (0, 0, WIDTH, HALF_HEIGHT))
         pygame.draw.rect(self.sc, DARKGRAY, (0, HALF_HEIGHT, WIDTH, HALF_HEIGHT))
 
     def world(self, player_pos, player_angle):
-        ray_casting(self.sc, player_pos, player_angle, self.texture)
+        ray_casting(self.sc, player_pos, player_angle, self.textures)
 
     def fps(self, clock):
         display_fps = str(int(clock.get_fps()))
