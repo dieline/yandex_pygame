@@ -8,7 +8,7 @@ class Player:
     def __init__(self):
         self.x, self.y = player_pos
         self.angle = player_angle
-        self.sensitivity = 0.002
+        self.sensitivity = 0.004
         self.side = 50
         self.rect = pygame.Rect(*player_pos, self.side, self.side)
 
@@ -45,6 +45,7 @@ class Player:
     def movement(self):
         self.keys_control()
         self.mouse_control()
+        self.angle %= DOUBLE_PI
 
     def keys_control(self):
         sin_a = math.sin(self.angle)
